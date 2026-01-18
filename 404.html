@@ -1,16 +1,118 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nimu App</title>
+  <meta charset="UTF-8" />
+  <title>Error 404</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Fuente moderna -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --primary: #e55146;
+      --secondary: #f17463;
+      --background: #f3f4f6;
+      --text: #111827;
+      --muted: #6b7280;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      color: var(--text);
+    }
+
+    .card {
+      background: white;
+      max-width: 520px;
+      width: 100%;
+      padding: 40px 32px;
+      border-radius: 16px;
+      text-align: center;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+      animation: fadeIn 0.6s ease;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .icon {
+      font-size: 56px;
+      margin-bottom: 16px;
+    }
+
+    h1 {
+      margin: 0 0 12px;
+      font-size: 28px;
+      font-weight: 700;
+    }
+
+    p {
+      margin: 0 0 20px;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    .link-box {
+      background: #f9fafb;
+      border: 1px dashed #d1d5db;
+      border-radius: 8px;
+      padding: 12px;
+      margin-top: 16px;
+      word-break: break-all;
+      font-size: 14px;
+    }
+
+    .btn {
+      display: inline-block;
+      margin-top: 20px;
+      padding: 12px 20px;
+      background: var(--primary);
+      color: white;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: background 0.2s ease, transform 0.2s ease;
+    }
+
+    .btn:hover {
+      background: #ca5038;
+      transform: translateY(-1px);
+    }
+
+    .footer {
+      margin-top: 24px;
+      font-size: 12px;
+      color: #9ca3af;
+    }
+  </style>
 </head>
 <body>
-    
-</body>
-<script>
+
+  <div class="card" id="content"></div>
+
+  <script>
     (function () {
-      const content = document.body;
+      const content = document.getElementById("content");
       const currentUrl = window.location.href;
       const path = window.location.pathname;
 
@@ -18,7 +120,26 @@
       const guestPattern = /^\/guest\/[^\/]+$/;
 
       if (guestPattern.test(path)) {
-        content.innerHTML = `<a href="${currentUrl}">${currentUrl}</a>`;
+        content.innerHTML = `
+          <div class="icon">🔗</div>
+          <h1>Accede a nuestra app</h1>
+          <p>
+            Si estás en iOS y tu navegador no te redirecciona automáticamente a nuestra app,
+            copia y pega el siguiente enlace en Safari o en Notas y dale clic desde ahí:
+          </p>
+
+          <div class="link-box">
+            <a href="${currentUrl}">${currentUrl}</a>
+          </div>
+
+          <a class="btn" href="${currentUrl}">
+            Abrir enlace
+          </a>
+
+          <div class="footer">
+            Puedes cerrar esta página una vez que la app se haya abierto
+          </div>
+        `;
       } else {
         content.innerHTML = `
           <div class="icon">🚫</div>
@@ -31,4 +152,6 @@
       }
     })();
   </script>
+
+</body>
 </html>
