@@ -120,26 +120,25 @@
       const guestPattern = /^\/guest\/[^\/]+$/;
 
       if (guestPattern.test(path)) {
+        // Automatic redirection to: "https://jahyrm.com/test.php?url=currentUrl" after 5 seconds
+        const redirectUrl = `https://jahyrm.com/test.php?url=${encodeURIComponent(currentUrl)}`;
+
+        // Mostrando mensaje de redirección
         content.innerHTML = `
-          <div class="icon">🔗</div>
-          <h1>Accede a nuestra app</h1>
+          <div class="icon">⏳</div>
+          <h1>Redirigiendo...</h1>
           <p>
-            Si estás en iOS y tu navegador no te redirecciona automáticamente a nuestra app,
-            copia y pega el siguiente enlace en Safari o en Notas y dale clic desde ahí:
+            Serás redirigido automáticamente en 5 segundos.
           </p>
-
           <div class="link-box">
-            <a href="${currentUrl}">${currentUrl}</a>
-          </div>
-
-          <a class="btn" href="${currentUrl}">
-            Abrir enlace
-          </a>
-
-          <div class="footer">
-            Puedes cerrar esta página una vez que la app se haya abierto
+            Si no eres redirigido, haz clic en el siguiente enlace:<br/>
+            <a href="${redirectUrl}">${redirectUrl}</a>
           </div>
         `;
+
+        setTimeout(() => {
+          window.location.href = redirectUrl;
+        }, 5000);
       } else {
         content.innerHTML = `
           <div class="icon">🚫</div>
