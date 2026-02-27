@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
   <meta charset="UTF-8" />
   <title>Error 404</title>
@@ -49,6 +50,7 @@
         opacity: 0;
         transform: translateY(10px);
       }
+
       to {
         opacity: 1;
         transform: translateY(0);
@@ -106,6 +108,7 @@
     }
   </style>
 </head>
+
 <body>
 
   <div class="card" id="content"></div>
@@ -116,10 +119,11 @@
       const currentUrl = window.location.href;
       const path = window.location.pathname;
 
-      // Patrón: /guest/<uid>
+      // Patrón: /guest/<uid> o /cohost/<uid>
       const guestPattern = /^\/guest\/[^\/]+$/;
+      const coHostPattern = /^\/cohost\/[^\/]+$/;
 
-      if (guestPattern.test(path)) {
+      if (guestPattern.test(path) || coHostPattern.test(path)) {
         // Automatic redirection to: "https://jahyrm.com/test.php?url=currentUrl" after 5 seconds
         const redirectUrl = `https://jahyrm.com/test.php?url=${encodeURIComponent(currentUrl)}`;
 
@@ -153,4 +157,5 @@
   </script>
 
 </body>
+
 </html>
